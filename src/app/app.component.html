@@ -1,3 +1,14 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- <ion-router-outlet></ion-router-outlet> -->
+  <ion-content>
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+
+  <ion-footer fullscreen [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        <span class="text-center">Copyright © {{thisYear}} Apple Inc.</span>
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
 </ion-app>

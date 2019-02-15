@@ -17,6 +17,9 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  today = new Date ();
+  thisYear = this.today.getFullYear();
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

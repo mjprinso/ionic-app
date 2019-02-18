@@ -1,27 +1,61 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>
-      Itunes Search App
-    </ion-title>
+    <ion-title class="top">Itunes Search App</ion-title>
+    <ion-buttons slot="primary" class="top">
+      <ion-button>
+        <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <span> This app searches the itunes store for you :)<br> You can filter search resuly</span>
-
   <ion-grid>
     <ion-row>
-      <ion-col size="6">
-        <div>
-          1 of 2
-        </div>
+      <ion-col size="12">
+        <span>This app searches the itunes store for you</span>
       </ion-col>
-
-      <ion-col>
-        <div>
-          2 of 2
-        </div>
+      <ion-col size="12">
+        <span>You can filter your results before searching using advance search</span>
+      </ion-col>
+      <ion-col size="12">
+        <span>You can also filter your search results</span>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <form [formGroup]="searchForm" novalidate>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12">
+                <mat-form-field class="full">
+                  <input matInput placeholder="Enter Search Term" formControlName="searchTerm">
+                  <mat-error *ngIf="searchForm.get('searchTerm').hasError('pattern')">Invalid input</mat-error>
+                </mat-form-field>
+              </ion-col>
+
+              <ion-col size="4" offset="1">
+                  <ion-button color="secondary" (click)="getResults()" [disabled]="searchForm.invalid">
+                      <ion-ripple-effect></ion-ripple-effect>
+                      Search
+                    </ion-button>
+              </ion-col>
+              <ion-col size="7">
+                  <ion-button color="tertiary" [disabled]="searchForm.invalid">
+                      <ion-ripple-effect></ion-ripple-effect>
+                      Advance Search
+                    </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

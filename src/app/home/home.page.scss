@@ -1,8 +1,19 @@
-
-.full{
+.full {
     width: 100%;
 }
 
-.top{
+.top {
     margin-top: 15px;
+}
+
+.row-top-10 {
+    margin-top: -10px;
+}
+
+ion-scroll[direction=x] {
+    width: 100vw;
+}
+
+ion-scroll[direction=y] {
+    height: 100vh;
 }

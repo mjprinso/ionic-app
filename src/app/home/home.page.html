@@ -3,7 +3,7 @@
     <ion-title class="top">Itunes Search App</ion-title>
     <ion-buttons slot="primary" class="top">
       <ion-button>
-        <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+        <ion-icon slot="icon-only" name="help-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
 
@@ -11,8 +11,10 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- <ion-content padding overflow-scroll="true"> -->
+<!-- <ion-content padding scroll-y="true" [scrollEvents]="true" fullscreen="true"> -->
 <ion-content padding>
-  <ion-grid>
+  <ion-grid *ngIf="!sResult.results.length">
     <ion-row>
       <ion-col size="12">
         <span>This app searches the itunes store for you</span>
@@ -31,6 +33,26 @@
       <ion-col size="12">
         <form [formGroup]="searchForm" novalidate>
           <ion-grid>
+            <ion-row *ngIf="iserror">
+              <ion-col size="2">
+                <ion-icon name="close-circle-outline" style="zoom:2.0;" color="danger"></ion-icon>
+              </ion-col>
+              <ion-col size="10">
+                <span color="danger">Sorry! An error occured. Please try again.
+                </span>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="nodata">
+              <ion-col size="2">
+                <ion-icon name="information-circle" style="zoom:2.0;" color="danger"></ion-icon>
+              </ion-col>
+              <ion-col size="10">
+                <span color="danger">Oops! No results found. Please try again.
+                </span>
+              </ion-col>
+            </ion-row>
+
             <ion-row>
               <ion-col size="12">
                 <mat-form-field class="full">
@@ -38,24 +60,40 @@
                   <mat-error *ngIf="searchForm.get('searchTerm').hasError('pattern')">Invalid input</mat-error>
                 </mat-form-field>
               </ion-col>
+            </ion-row>
 
-              <ion-col size="4" offset="1">
-                  <ion-button color="secondary" (click)="getResults()" [disabled]="searchForm.invalid">
-                      <ion-ripple-effect></ion-ripple-effect>
-                      Search
-                    </ion-button>
+            <ion-row class="row-top-10">
+              <ion-col size="4" offset="1" *ngIf="!loading">
+                <ion-button color="secondary" (click)="getResults()" [disabled]="searchForm.invalid">
+                  <ion-ripple-effect></ion-ripple-effect>
+                  Search
+                </ion-button>
               </ion-col>
-              <ion-col size="7">
-                  <ion-button color="tertiary" [disabled]="searchForm.invalid">
-                      <ion-ripple-effect></ion-ripple-effect>
-                      Advance Search
-                    </ion-button>
+              <ion-col size="7" *ngIf="!loading">
+                <ion-button color="tertiary" [disabled]="searchForm.invalid">
+                  <ion-ripple-effect></ion-ripple-effect>
+                  Advance Search
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="loading" class="row-top-10">
+              <ion-col>
+                <ion-progress-bar type="indeterminate"></ion-progress-bar>
               </ion-col>
             </ion-row>
           </ion-grid>
         </form>
       </ion-col>
     </ion-row>
+
+    <ion-row *ngIf="sResult.results.length">
+      <ion-col size="12">
+        <app-search-results [sResult]="sResult"></app-search-results>
+      </ion-col>
+    </ion-row>
+
+
   </ion-grid>
 
 </ion-content>

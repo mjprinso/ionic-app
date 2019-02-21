@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+// import { NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-search-result-details',
@@ -6,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-result-details.component.scss'],
 })
 export class SearchResultDetailsComponent implements OnInit {
+  @Input() info: any = {};
+  constructor(private modal: ModalController) { }
 
-  constructor() { }
+  ngOnInit() {
+    console.log(this.info);
+  }
 
-  ngOnInit() {}
+  closeModal() {
+    this.modal.dismiss();
+  }
 
 }

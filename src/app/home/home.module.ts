@@ -25,6 +25,7 @@ const routes = [
     MatInputModule,
     ReactiveFormsModule,
   ],
-  declarations: [HomePage, SearchResultsComponent, SearchResultDetailsComponent]
+  declarations: [HomePage, SearchResultsComponent, SearchResultDetailsComponent],
+  entryComponents: [SearchResultDetailsComponent]
 })
 export class HomePageModule { }
